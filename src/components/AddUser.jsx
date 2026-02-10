@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-function AddUser(Adduser) {
+function AddUser({ addUser, users }) {
   const [name, setName] = useState("");
 
-  function handleSave(name) {
-    AddUser(name);
+  function handleSave() {
+    if (!name) return;
+    addUser(name);
     setName("");
+    console.log(users);
   }
 
   return (
@@ -16,7 +18,9 @@ function AddUser(Adduser) {
         onChange={(e) => setName(e.target.value)}
         placeholder="Name"
       />
-      <button onClick={handleSave}></button>
+      <button onClick={handleSave}>Add User</button>
     </>
   );
 }
+
+export default AddUser;

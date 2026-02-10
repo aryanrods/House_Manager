@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddUser from "./components/AddUser";
 import AddExpense from "./components/AddExpense";
+import BalanceList from "./components/BalanceList";
 
 function App() {
   const [users, SetUsers] = useState([]);
@@ -14,19 +15,29 @@ function App() {
     SetUsers([...users, newUser]);
   }
 
-  function AddExpense(payer, amount) {
+  function addExpense(payer, amount) {
     const splitAmount = amount / users.length;
 
     const newArray = users.map((user) => {
-      if (users.name === payer) {
-        return { ...users, balance: user.balance - splitamount + amount };
+      if (user.name === payer) {
+        return { ...user, balance: user.balance - splitAmount + amount };
       } else {
-        return { ...user, balance: balance - splitAmount };
+        return { ...user, balance: user.balance - splitAmount };
       }
     });
+
+    SetUsers(newArray);
+    console.log("addExpenses ran");
   }
 
-  return;
+  return (
+    <>
+      <h2>Split Billsssssss</h2>
+      <AddUser addUser={addUser}></AddUser>
+      <AddExpense users={users} addExpense={addExpense}></AddExpense>
+      <BalanceList users={users}></BalanceList>
+    </>
+  );
 }
 
 export default App;
