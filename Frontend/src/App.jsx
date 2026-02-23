@@ -4,7 +4,7 @@ import AddExpense from "./components/AddExpense";
 import BalanceList from "./components/BalanceList";
 
 function App() {
-  const [users, SetUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   function addUser(name) {
     const newUser = {
@@ -12,13 +12,21 @@ function App() {
       balance: 0,
     };
 
-    SetUsers([...users, newUser]);
+    setUsers([...users, newUser]);
   }
 
-  function addExpense(payer, amount) {
-    const splitAmount = amount / users.length;
+  function addExpense(payer, amount, selectedUsers) {
+    if (selectedUsers.length === 0) {
+      return;
+    }
+
+    const splitAmount = amount / selectedUsers.length;
 
     const newArray = users.map((user) => {
+      if (!selectedUsers.includes(user.name)) {
+        return user;
+      }
+
       if (user.name === payer) {
         return { ...user, balance: user.balance - splitAmount + amount };
       } else {
@@ -26,7 +34,7 @@ function App() {
       }
     });
 
-    SetUsers(newArray);
+    setUsers(newArray);
     console.log("addExpenses ran");
   }
 
