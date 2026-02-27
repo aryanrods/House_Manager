@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
+const userRoutes = require("./routes/userRoutes");
 const app = express();
 
 //Middleware
@@ -14,10 +15,9 @@ console.log("file executed");
 
 //Test route
 
-app.get("/", (req, res) => {
-  console.log("root route hit ");
-  res.send("Backend is runing");
-});
+//Routes
+
+app.use("/users", userRoutes);
 
 const PORT = 3001;
 
