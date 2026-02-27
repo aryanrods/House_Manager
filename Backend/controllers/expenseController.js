@@ -11,7 +11,7 @@ function addExpense(req, res) {
   if (!payer || !amount || !participants) {
     return res.status(400).json({ error: "Invalid data" });
   }
-
+  //Splitamount
   const splitAmount = amount / participants.length;
 
   const expense = {
@@ -23,7 +23,7 @@ function addExpense(req, res) {
   };
   store.expenses.push(expense);
 
-  // Update balances
+  // Update balance
 
   store.users = store.users.map((user) => {
     if (!participants.includes(user.name)) {
