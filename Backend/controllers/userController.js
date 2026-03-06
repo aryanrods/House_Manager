@@ -18,7 +18,7 @@ function addUsers(req, res) {
   const newUser = {
     id: Date.now().toString(),
     name,
-    balances: 0,
+    balance: 0,
   };
 
   store.users.push(newUser);
